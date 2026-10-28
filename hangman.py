@@ -13,3 +13,25 @@ def format_bad_guess(x, y):
         return x[:-(len(x) - y)]
     else:
         return x + ("*" * (y - len(x)))
+
+print("Hangman!")
+guesses = ""
+bad_guesses = ""
+while True:
+    if "*" not in format_bad_guess(bad_guesses, 6):
+        print("\nNO PAIN NO GAIN")
+        print("You lose!")
+        break
+    elif "-" not in redact_phrase("NO PAIN NO GAIN", guesses):
+        print("\nNO PAIN NO GAIN")
+        print("You win!")
+        break
+    else:
+        print(redact_phrase("NO PAIN NO GAIN", guesses) + "   Bad guesses: " + format_bad_guess(bad_guesses, 6))
+        current = clean_phrase(input("Guess a letter: "))
+        if current in "NO PAIN NO GAIN":
+            guesses = guesses + current
+            print("Good guess!\n")
+        else:
+            bad_guesses = bad_guesses + current
+            print("Sorry!\n")
